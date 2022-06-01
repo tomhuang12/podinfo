@@ -6,9 +6,11 @@ on:
       tag:
         description: image tag to push
         required: true
+        default: 1.0.0
       client:
         description: client name used in tagging
         required: true
+        default: test
 
 jobs:
   deploy-dv:

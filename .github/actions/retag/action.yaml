@@ -29,6 +29,7 @@ runs:
         password: ${{ inputs.GHCR_TOKEN }}
         
     - name: Pull Image
+      shell: bash
       env:
         old_image: ghcr.io/tomhuang12/podinfo:${{ inputs.tag }}
         new_image: ghcr.io/tomhuang12/podinfo:${{ inputs.tag }}+${{ inputs.client }}-${{ inputs.env }}
