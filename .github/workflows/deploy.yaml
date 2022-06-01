@@ -22,7 +22,7 @@ jobs:
         GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
         tag: ${{ github.event.inputs.tag }}
         client: ${{ github.event.inputs.client }}
-        env: ${{ jobs.deploy-dv.environment}}
+        env: dv
 
   deploy-sg:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
         GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
         tag: ${{ github.event.inputs.tag }}
         client: ${{ github.event.inputs.client }}
-        env: ${{ jobs.deploy-sg.environment}}
+        env: sg
 
   deploy-pd:
     runs-on: ubuntu-latest
@@ -48,4 +48,4 @@ jobs:
         GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
         tag: ${{ github.event.inputs.tag }}
         client: ${{ github.event.inputs.client }}
-        env: ${{ jobs.deploy-pd.environment}}
+        env: pd
