@@ -1,0 +1,51 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: image tag to push
+        required: true
+      client:
+        description: client name used in tagging
+        required: true
+
+jobs:
+  deploy-dv:
+    runs-on: ubuntu-latest
+    environment: 'dv'
+    steps:
+    - name: Setup Helm
+      uses: ./.github/actions/retag
+      with:
+        GHCR_USERNAME: tomhuang12
+        GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        tag: ${{ github.event.inputs.tag }}
+        client: ${{ github.event.inputs.client }}
+        env: ${{ jobs.deploy-dv.environment}}
+
+  deploy-sg:
+    runs-on: ubuntu-latest
+    environment: 'sg'
+    steps:
+    - name: Setup Helm
+      uses: ./.github/actions/retag
+      with:
+        GHCR_USERNAME: tomhuang12
+        GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        tag: ${{ github.event.inputs.tag }}
+        client: ${{ github.event.inputs.client }}
+        env: ${{ jobs.deploy-sg.environment}}
+
+  deploy-pd:
+    runs-on: ubuntu-latest
+    environment: 'pd'
+    steps:
+    - name: Setup Helm
+      uses: ./.github/actions/retag
+      with:
+        GHCR_USERNAME: tomhuang12
+        GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        tag: ${{ github.event.inputs.tag }}
+        client: ${{ github.event.inputs.client }}
+        env: ${{ jobs.deploy-pd.environment}}

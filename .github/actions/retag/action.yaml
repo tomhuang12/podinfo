@@ -1,0 +1,38 @@
+name: Api Docker Image 
+description: "module to push api image to github and azure"
+
+inputs:
+  GHCR_USERNAME:
+    description: ghcr username
+    required: true
+  GHCR_TOKEN:
+    description: ghcr token
+    required: true
+  tag:
+    description: image tag
+    required: true
+  client:
+    description: client name
+    required: true
+  env:
+    description: environment name
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.GHCR_USERNAME }}
+        password: ${{ inputs.GHCR_TOKEN }}
+        
+    - name: Pull Image
+      env:
+        old_image: ghcr.io/tomhuang12/podinfo:${{ inputs.tag }}
+        new_image: ghcr.io/tomhuang12/podinfo:${{ inputs.tag }}+${{ inputs.client }}-${{ inputs.env }}
+      run: |
+        docker pull $old_image
+        docker tag $old_image $new_image
+        docker push $new_image
