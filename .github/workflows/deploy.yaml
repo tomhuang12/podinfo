@@ -15,7 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'dv'
     steps:
-    - name: Setup Helm
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: deploy
       uses: ./.github/actions/retag
       with:
         GHCR_USERNAME: tomhuang12
@@ -28,7 +30,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'sg'
     steps:
-    - name: Setup Helm
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: deploy
       uses: ./.github/actions/retag
       with:
         GHCR_USERNAME: tomhuang12
@@ -41,7 +45,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'pd'
     steps:
-    - name: Setup Helm
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: deploy
       uses: ./.github/actions/retag
       with:
         GHCR_USERNAME: tomhuang12
